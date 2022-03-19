@@ -6,7 +6,7 @@ namespace FizzBuzzWeb.Pages
 {
     public class IndexModel : PageModel
     {
-        public CustomValidator CustomValidator { get; set; }
+        public bool helpBool = false;
         private readonly ILogger<IndexModel> _logger;
         [BindProperty(SupportsGet=true)]
         public string name {get; set; }
@@ -29,6 +29,13 @@ namespace FizzBuzzWeb.Pages
 
         public IActionResult OnPost()
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                name = "User";
+            }
+
+            helpBool = true;
+
             if (!ModelState.IsValid)
             {
                 return Page();
